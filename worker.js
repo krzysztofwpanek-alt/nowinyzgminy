@@ -8,6 +8,8 @@ const COOKIE_NAME = "nowiny_auth";
 // Dostępne bez logowania (tylko to, czego potrzebuje strona logowania).
 const PUBLIC_PATHS = new Set([
   "/login.html", "/site.css", "/assets/logogwz-crop.jpg", "/robots.txt", "/favicon.ico",
+  "/manifest.webmanifest", "/sw.js", "/assets/icon-192.png", "/assets/icon-512.png",
+  "/assets/icon-maskable-512.png", "/assets/apple-touch-icon.png",
 ]);
 
 async function hashPassword(password) {
