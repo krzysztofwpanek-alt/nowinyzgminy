@@ -1,3 +1,7 @@
+(function(){var el=document.getElementById('tydzien');if(!el)return;function e(x){return String(x).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+fetch('/tydzien.json').then(function(r){return r.json()}).then(function(d){var o=d[el.getAttribute('data-k')];var h='<p class="wk-w"><b>'+e(o.tydzien)+'</b>'+(o.parsza?' · Parsza <b>'+e(o.parsza)+'</b>':'')+(o.fragment?' ('+e(o.fragment)+')':'')+(o.numer?' · nr '+e(o.numer):'')+'</p><div class="wk-d">';
+o.dni.forEach(function(x){h+='<section class="wk-c"><h2>'+e(x.dzien)+'</h2><table>';x.godz.forEach(function(g){h+='<tr><th>'+e(g[0])+'</th><td>'+e(g[1])+'</td></tr>'});h+='</table></section>'});
+h+='</div>';o.sekcje.forEach(function(s){h+='<section class="wk-s"><h2>'+e(s.tytul)+'</h2>'+s.html+'</section>'});h+='<p class="wk-z">'+e(o.zrodlo)+'</p>';el.innerHTML=h}).catch(function(){el.innerHTML='<p>Nie udało się wczytać danych. Spróbuj ponownie później.</p>'})})();
 if('serviceWorker' in navigator)window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})});
 if(/\/login\.html/.test(location.pathname)&&'serviceWorker' in navigator&&navigator.serviceWorker.controller)navigator.serviceWorker.controller.postMessage('clear');
 document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toggle'),n=document.querySelector('nav.m');if(t&&n)t.addEventListener('click',function(){n.classList.toggle('open')});
