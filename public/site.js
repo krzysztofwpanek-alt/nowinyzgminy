@@ -1,1 +1,5 @@
-document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toggle'),n=document.querySelector('nav.m');if(t&&n)t.addEventListener('click',function(){n.classList.toggle('open')})});
+if('serviceWorker' in navigator)window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})});
+if(/\/login\.html/.test(location.pathname)&&'serviceWorker' in navigator&&navigator.serviceWorker.controller)navigator.serviceWorker.controller.postMessage('clear');
+document.addEventListener('DOMContentLoaded',function(){var t=document.querySelector('.toggle'),n=document.querySelector('nav.m');if(t&&n)t.addEventListener('click',function(){n.classList.toggle('open')});
+var bs=document.querySelectorAll('.ux button');function mark(){var c=document.documentElement.getAttribute('data-theme')||'';bs.forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-t')===c))})}
+bs.forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-t');if(v)document.documentElement.setAttribute('data-theme',v);else document.documentElement.removeAttribute('data-theme');try{if(v)localStorage.setItem('nz-theme',v);else localStorage.removeItem('nz-theme')}catch(e){}mark()})});mark()});
