@@ -1,3 +1,4 @@
+window.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.pp img').forEach(function(i){function f(){i.parentNode.classList.add('nophoto');i.remove()}if(i.complete&&!i.naturalWidth)f();else i.addEventListener('error',f)});});
 (function(){var el=document.getElementById('tydzien');if(!el)return;function e(x){return String(x).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
 fetch('/tydzien.json').then(function(r){return r.json()}).then(function(d){var o=d[el.getAttribute('data-k')];var h='<p class="wk-w"><b>'+e(o.tydzien)+'</b>'+(o.parsza?' · Parsza <b>'+e(o.parsza)+'</b>':'')+(o.fragment?' ('+e(o.fragment)+')':'')+(o.numer?' · nr '+e(o.numer):'')+'</p><div class="wk-d">';
 o.dni.forEach(function(x){h+='<section class="wk-c"><h2>'+e(x.dzien)+'</h2><table>';x.godz.forEach(function(g){h+='<tr><th>'+e(g[0])+'</th><td>'+e(g[1])+'</td></tr>'});h+='</table></section>'});
