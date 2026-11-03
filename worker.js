@@ -19,7 +19,7 @@ async function hashPassword(password) {
 
 async function handleLogin(request) {
   const form = await request.formData();
-  const password = (form.get("password") || "").toString();
+  const password = (form.get("password") || "").toString().trim();
   const next = (form.get("next") || "/").toString();
   if (password !== SITE_PASSWORD) {
     const u = new URL("/login.html", request.url);
@@ -44,6 +44,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const p = url.pathname;
+
+    // Ciasteczko logowania jest „Secure” – po zwykłym http:// telefon go odrzuca i logowanie wraca do formularza.
+    if (url.protocol === "http:" && !["localhost","127.0.0.1"].includes(url.hostname)) {
+      url.protocol = "https:";
+      return Response.redirect(url.toString(), 301);
+    }
 
     if (p === "/api/login" && request.method === "POST") return handleLogin(request);
     if (p === "/api/logout") return handleLogout(request);
