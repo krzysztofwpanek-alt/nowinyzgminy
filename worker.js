@@ -48,7 +48,7 @@ export default {
     if (p === "/api/login" && request.method === "POST") return handleLogin(request);
     if (p === "/api/logout") return handleLogout(request);
 
-    if (!PUBLIC_PATHS.has(p)) {
+    if (!(PUBLIC_PATHS.has(p) || p.startsWith("/fonts/") || p.startsWith("/assets/"))) {
       const m = (request.headers.get("Cookie") || "").match(new RegExp(`${COOKIE_NAME}=([^;]+)`));
       const ok = m && m[1] === (await hashPassword(SITE_PASSWORD));
       if (!ok) {
